@@ -1,0 +1,13 @@
+{
+  "case_cohort": {
+    "$dnanexus_link": "record-GY24P6jJY63V06Pf3JZ7ypzJ"
+  },
+  "control_cohort": {
+    "$dnanexus_link": "record-GY24Py0JY63g56b58QZJy87J"
+  },
+  "out": "cohort_freq",
+  "geno_tb": "genotype_23157",
+  "min_maf": 0.001,
+  "firth": false,
+  "test": "wald"
+}

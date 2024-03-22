@@ -1,0 +1,138 @@
+{
+  "name": "is-gwas-spark",
+  "title": "isGWAS-Spark",
+  "summary": "In Silico GWAS",
+  "dxapi": "1.0.0",
+  "version": "0.0.1",
+  "inputSpec": [
+    {
+      "name": "case_cohort",
+      "label": "Case Cohort",
+      "class": "record",
+      "optional": false,
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "control_cohort",
+      "label": "Control Cohort",
+      "class": "record",
+      "optional": false,
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    },
+    {
+      "name": "geno_tb",
+      "label": "Genotype Table",
+      "class": "string",
+      "optional": false,
+      "default": "genotype_23157",
+      "group": "GWAS Settings",
+      "help": ""
+    },
+    {
+      "name": "min_maf",
+      "label": "Minimum MAF",
+      "class": "float",
+      "optional": false,
+      "default": 0.001,
+      "group": "GWAS Settings",
+      "help": ""
+    },
+    {
+      "name": "firth",
+      "label": "Firth Correction",
+      "class": "boolean",
+      "optional": false,
+      "default": false,
+      "group": "GWAS Settings",
+      "help": ""
+    },
+    {
+      "name": "test",
+      "label": "Test Statistic",
+      "class": "string",
+      "optional": false,
+      "choices": ["wald", "lrt"],
+      "default": "wald",
+      "group": "GWAS Settings",
+      "help": ""
+    },
+    {
+      "name": "out",
+      "label": "Output Name",
+      "class": "string",
+      "optional": false,
+      "default": "isgwas_results",
+      "group": "GWAS Settings",
+      "help": ""
+    }
+  ],
+  "outputSpec": [
+    {
+      "name": "csv",
+      "class": "file",
+      "patterns": [
+        "*.csv"
+      ],
+      "help": ""
+    },
+    {
+      "name": "manhattan",
+      "class": "file",
+      "patterns": [
+        "*.html"
+      ],
+      "optional": true,
+      "help": ""
+    }
+  ],
+  "runSpec": {
+    "timeoutPolicy": {
+      "*": {
+        "hours": 6
+      }
+    },
+    "interpreter": "bash",
+    "file": "src/start_app.sh",
+    "distribution": "Ubuntu",
+    "release": "20.04",
+    "version": "0",
+    "execDepends": [
+      {"name": "scipy", "version": "1.9.1", "package_manager": "pip"},
+      {"name": "sympy", "version": "1.12", "package_manager": "pip"},
+      {"name": "dash-bio", "version": "1.0.2", "package_manager": "pip"}
+    ]
+  },
+  "access": {
+    "project": "UPLOAD",
+    "allProjects": "VIEW",
+    "network": [
+      "*"
+    ]
+  },
+  "httpsApp": {
+    "shared_access":"NONE",
+    "ports": [
+      8081
+    ]
+  },
+  "regionalOptions": {
+    "aws:eu-west-2": {
+      "systemRequirements": {
+        "*": {
+          "instanceType": "mem2_ssd1_v2_x32",
+          "clusterSpec": {
+            "type": "dxspark",
+            "version": "3.2.3",
+            "initialInstanceCount": 3
+          }
+        }
+      }
+    }
+  }
+}
