@@ -1,7 +1,7 @@
-# isGWAS (in-silico GWAS), using Spark and Apollo Germline Data Model
+# isGWAS (in-silico GWAS; a method developed by Foley et al. 2023) implemented as a DNAnexus Spark applet
 
 Computes case-control GWAS statistics using only sufficient statistics (cohort allele frequencies and sample sizes)
-according to methods described in [Foley et al.](https://www.biorxiv.org/content/10.1101/2023.07.21.550074v3.full.pdf)
+according to methods described in [Foley et al. 2023](https://www.biorxiv.org/content/10.1101/2023.07.21.550074v3.full.pdf)
 
 ## Inputs
 - Case Cohort Object
